@@ -6,17 +6,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import static org.usfirst.frc.team3464.robot.Const.*;
 
 public class Drive {
-	CANTalon[] lMotors;
-	CANTalon[] rMotors;
+	CANTalon[] lMotors = {new CANTalon(FRONT_LEFT_ID), new CANTalon(BACK_LEFT_ID)};
+	CANTalon[] rMotors = {new CANTalon(FRONT_RIGHT_ID), new CANTalon(BACK_RIGHT_ID)};
 	Joystick l;
 	Joystick r;
-	
 	CANTalon lMotor;
 	CANTalon rMotor;
 	
-	public Drive(CANTalon[] lMotors, CANTalon[] rMotors, Joystick l, Joystick r){
-		lMotors = this.lMotors;
-		rMotors = this.rMotors;
+	public Drive(Joystick l, Joystick r){
+		//lMotors = this.lMotors;
+		//rMotors = this.rMotors;
 		l = this.l;
 		r = this.r;
 	}
