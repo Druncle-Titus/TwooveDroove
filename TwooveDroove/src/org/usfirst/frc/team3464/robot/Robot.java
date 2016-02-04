@@ -7,16 +7,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import static org.usfirst.frc.team3464.robot.Const.*;
 
 public class Robot extends SampleRobot {
-	
+	//optimum range for vex sensor is 2-18 
 	Drive drive;
 	CANTalon spin;
-	BallMechanism intake;
-Joystick l = new Joystick (1);
-Joystick r = new Joystick (0);
+	BallMechanism mech;
+	Lift lift;
+	//Joystick l = new Joystick (1);
+	//Joystick r = new Joystick (0);
+
+	SensorUtil sense;
     public Robot() {
-        drive = new Drive(new Joystick(LEFT_STICK), new Joystick(RIGHT_STICK));
-        //intake = new BallMechanism( "up", new Joystick(OTHER_STICK));
+     //   drive = new Drive(new Joystick(LEFT_STICK), new Joystick(RIGHT_STICK));
+        //mech = new BallMechanism( "up", new Joystick(OTHER_STICK));
     	//spin = new CANTalon(2); 
+        sense = new SensorUtil();
+        lift = new Lift();
     }
     public void autonomous() {
     	
@@ -24,19 +29,14 @@ Joystick r = new Joystick (0);
 
     public void operatorControl() {
         while(isOperatorControl() && isEnabled()){
-        	drive.drive();
+        //	drive.drive();
         	}
-        	//spin.set(s.getRawButton(3) ? 0.3: 0);
-        	/*SmartDashboard.putString("DB/String 0 ", "vroom vroom");
-        	try{
-        		Thread.sleep(10);
-        	}catch(Exception e){
-        		e.printStackTrace();
-        	}*/
         }
     
 
     public void test() {
-    	
+    	while(isTest() && isEnabled()){
+    		lift.extend();
+    	}
     }
 }
