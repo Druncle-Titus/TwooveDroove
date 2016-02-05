@@ -19,7 +19,7 @@ public class Lift {
 		stick = new Joystick(OTHER_STICK);
 	}
 	
-	public void extend(){
+	public void move(){
 		if(stick.getRawButton(3))
 		   {
 			   extendMotor.set(0);

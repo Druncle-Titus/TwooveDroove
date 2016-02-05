@@ -13,6 +13,7 @@ public class Drive {
 	CANTalon lMotor;
 	CANTalon rMotor;
 	
+	//Constructor for the tank treads
 	public Drive(Joystick l, Joystick r){
 		for(int i = 0; i < 2 ; ++i){
 			lMotors[i] = new CANTalon(LEFT_DRIVE_ID[i]);
@@ -21,11 +22,21 @@ public class Drive {
 		l = this.l;
 		r = this.r;
 	}
+	
+	//Constructor for the alternate drive train
 	public Drive(CANTalon lMotor, CANTalon rMotor, Joystick l, Joystick r){
 		lMotor = this.lMotor;
 		rMotor = this.rMotor;
 		l = this.l;
 		r = this.r;
+	}
+	
+	//Constructor for autonomous
+	public Drive(){
+		for(int i = 0; i < 2 ; ++i){
+			lMotors[i] = new CANTalon(LEFT_DRIVE_ID[i]);
+			rMotors[i] = new CANTalon(RIGHT_DRIVE_ID[i]);
+		}
 	}
 	
 	public void drive(){
@@ -34,23 +45,29 @@ public class Drive {
 			rMotors[i].set(r.getY() * SPEED_MULTIPLIER);
 		}
 	}
-	public void driveUpAuto()
+	public void autoForward()
 	{
-		for(int i = 0; i < 500; ++i )
-			for(int j = 0; j < lMotors.length; ++j)
+		for(int j = 0; j < lMotors.length; ++j)
 			{
-				lMotors[i].set(-1 *AUTO_GENERIC);
-				rMotors[i].set(AUTO_GENERIC);
+				lMotors[j].set(-1 *AUTO_GENERIC);
+				rMotors[j].set(AUTO_GENERIC);
 			}
 	}
 	public void driveOverAuto()
 	{
-		for(int i = 0; i < 1000; ++i ) {
 			for(int j = 0; j < lMotors.length; ++j)
 			{
-				lMotors[i].set(-1 *AUTO_GENERIC);
-				rMotors[i].set(AUTO_GENERIC);
+				lMotors[j].set(-1 *AUTO_GENERIC);
+				rMotors[j].set(AUTO_GENERIC);
 			}
-		}
+	}
+	public void autoStop()
+	{
+		for(int j = 0; j < lMotors.length; ++j)
+		{
+			lMotors[j].set(0);
+			rMotors[j].set(0);
+		}	
 	}
 }
+

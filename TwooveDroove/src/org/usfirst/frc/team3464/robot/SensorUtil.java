@@ -45,6 +45,11 @@ public class SensorUtil {
 	public double getAngleOffset(){
 		return gyro.getAngle() - gyroAngle;
 	}
+	public double updateAngle()
+	{
+		gyroAngle =gyro.getAngle();
+		return gyroAngle;
+	}
 	
 	//Accelerometer methods
 	public double accelerationX(){

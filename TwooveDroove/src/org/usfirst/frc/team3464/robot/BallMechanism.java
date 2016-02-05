@@ -25,15 +25,7 @@ public class BallMechanism {
 	
 	public void run()
 	{
-		
-		 if(control.getRawButton(1))
-		   {
-		    s.set(FINAL_POSITION);
-		   }
-		   else
-		   {
-			   s.set(INITIAL_POSITION);
-		   }
+		s.set(control.getRawButton(1) ? FINAL_POSITION : INITIAL_POSITION);
 			   
 		  if(control.getY() < -1 * DEADZONE)
 		   {
@@ -49,7 +41,6 @@ public class BallMechanism {
 		   {
 			   left.set(0);
 			   right.set(0);
-		   }}
-	
-	
+		   }
+	}		
 }

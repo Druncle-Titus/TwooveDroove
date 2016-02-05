@@ -27,14 +27,14 @@ public class Const {
 	//Mechanism IDs
 	public static final int LEFT_INTAKE_ID = 5;
 	public static final int RIGHT_INTAKE_ID = 6;
-	public static final int RETRACT_FRONT_ID = 1;
-	public static final int RETRACT_BACK_ID = 2;
-	public static final int EXTEND_ID = 3;
+	public static final int RETRACT_FRONT_ID = 7;
+	public static final int RETRACT_BACK_ID = 8;
+	public static final int EXTEND_ID = 9;
 	
 	//Joystick IDs
 	public static final int LEFT_STICK = 0;
 	public static final int RIGHT_STICK = 1;
-	public static final int OTHER_STICK = 0;
+	public static final int OTHER_STICK = 2;
 	
 	
 	
