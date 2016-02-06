@@ -13,6 +13,7 @@ public class Drive {
 	CANTalon lMotor;
 	CANTalon rMotor;
 	
+	
 	//Constructor for the tank treads
 	public Drive(Joystick l, Joystick r){
 		for(int i = 0; i < 2 ; ++i){
@@ -69,5 +70,20 @@ public class Drive {
 			rMotors[j].set(0);
 		}	
 	}
+	public void autoLeft()
+	{
+		for(int i = 0; i < lMotors.length; ++i )
+		{
+			lMotors[i].set(0.25 * AUTO_GENERIC);
+			rMotors[i].set(0.25 * AUTO_GENERIC);
+		}
+	}
+	public void autoRight()
+	{
+		for(int i = 0; i < lMotors.length; ++i )
+		{
+			lMotors[i].set(-0.25 * AUTO_GENERIC);
+			rMotors[i].set(-0.25 * AUTO_GENERIC);
+		}
+	}
 }
-

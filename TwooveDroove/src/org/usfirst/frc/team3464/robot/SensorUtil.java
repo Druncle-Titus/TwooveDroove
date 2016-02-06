@@ -75,7 +75,10 @@ public class SensorUtil {
 		}
 		return ultraDistance;
 	}
-	
+	public boolean validRange()
+	{
+		return ultra.isRangeValid();
+	}
 	//Camera methods
 	
 }

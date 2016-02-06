@@ -11,22 +11,22 @@ public class Lift {
 	CANTalon retractMotorBack;
 	Joystick stick;
 	
-	public Lift(){
+	public Lift(Joystick j){
 		extendMotor = new CANTalon(EXTEND_ID);
 		retractMotorFront = new CANTalon(RETRACT_FRONT_ID);
 		retractMotorBack = new CANTalon(RETRACT_BACK_ID);
 		retractMotorBack.setInverted(true);
-		stick = new Joystick(OTHER_STICK);
+		stick = j;
 	}
 	
 	public void move(){
-		if(stick.getRawButton(3))
+		if(stick.getRawButton(RETRACT_JOY))
 		   {
 			   extendMotor.set(0);
 			   retractMotorFront.set(.5);
 			   retractMotorBack.set(.5);
 		   }
-		   else if(stick.getRawButton(4))
+		   else if(stick.getRawButton(EXTEND_JOY))
 		   {
 			   extendMotor.set(-.8);
 			   retractMotorFront.set(-.4);
