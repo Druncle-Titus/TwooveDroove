@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Encoder;
-import java.text.DecimalFormat;
-
 
 import static org.usfirst.frc.team3464.robot.Const.*;
 
@@ -16,20 +13,15 @@ public class Robot extends SampleRobot {
 	Lift lift;
 	Autonomous opt;
 	SensorUtil sense;
-	CANTalon encoded;
-	Encoder e;
-	DecimalFormat fmt;
+	EncoderTest enc;
 	Joystick o = new Joystick(OTHER_STICK);
     public Robot() {
         drive = new Drive(new Joystick(LEFT_STICK), new Joystick(RIGHT_STICK));
         mech = new BallMechanism(o);
-        //sense = new SensorUtil();
+        sense = new SensorUtil();
         lift = new Lift(o);
         opt = new Autonomous(drive, sense, mech);
-        e = new Encoder(1,2);
-        fmt = new DecimalFormat("0.00");
-        encoded = new CANTalon(1);
-        e.setDistancePerPulse(1.0/1000);
+        enc = new EncoderTest();
     }
     
     public void updateDashboard(){
@@ -51,16 +43,13 @@ public class Robot extends SampleRobot {
         	//mech.run();
         	//lift.move();
         	//updateDashboard();
-        	encoded.set(o.getY());
-        	SmartDashboard.putString("DB/String 0", o.getY() + " ");
-        	SmartDashboard.putString("DB/String 1", fmt.format(e.getRate()));
         	}
         }
     
 
     public void test() {
     	while(isTest() && isEnabled()){
-    		lift.move();
+    		enc.readEncoder();
     	}
     }
 }
