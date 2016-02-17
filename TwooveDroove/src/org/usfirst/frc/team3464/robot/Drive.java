@@ -20,16 +20,16 @@ public class Drive {
 			lMotors[i] = new CANTalon(LEFT_DRIVE_ID[i]);
 			rMotors[i] = new CANTalon(RIGHT_DRIVE_ID[i]);
 		}
-		l = this.l;
-		r = this.r;
+		this.l = l;
+		this.r = r;
 	}
 	
 	//Constructor for the alternate drive train
 	public Drive(CANTalon lMotor, CANTalon rMotor, Joystick l, Joystick r){
-		lMotor = this.lMotor;
-		rMotor = this.rMotor;
-		l = this.l;
-		r = this.r;
+		this.lMotor = lMotor;
+		this.rMotor = rMotor;
+		this.l = l;
+		this.r = r;
 	}
 	
 	//Constructor for autonomous
@@ -45,6 +45,10 @@ public class Drive {
 			lMotors[i].set(l.getY() * -SPEED_MULTIPLIER);
 			rMotors[i].set(r.getY() * SPEED_MULTIPLIER);
 		}
+	}
+	public void driveAlternate(){
+		lMotor.set(l.getY() * -SPEED_MULTIPLIER);
+		rMotor.set(r.getY() * SPEED_MULTIPLIER);
 	}
 	public void autoForward()
 	{

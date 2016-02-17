@@ -17,7 +17,7 @@ public class SensorUtil {
 	Ultrasonic ultra;
 	USBCamera cam;
 	CameraServer server;
-	
+	//A:0, B:1
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
