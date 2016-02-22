@@ -10,59 +10,85 @@ import static org.usfirst.frc.team3464.robot.Const.*;
 
 
 public class BallMechanism {
-	String mode;	
 	Joystick control;
 	CANTalon left;
 	CANTalon right;
-	Talon window;
+	CANTalon mover;
 	Servo s;
-	public BallMechanism (Joystick c )
+	public BallMechanism (Joystick c)
 	{
 		control = c;
 		left = new CANTalon(LEFT_INTAKE_ID);
 		right = new CANTalon(RIGHT_INTAKE_ID);
 		s = new Servo(0);
-		window = new Talon(1);
-		
+		mover = new CANTalon(LIFT_ID);
 	}
 	
 	
 	public void run()
 	{
 		s.set(control.getRawButton(SERVO_EXTENDER) ? FINAL_POSITION : INITIAL_POSITION);
-		if(control.getY() > DEADZONE)
+		if(control.getRawButton(INTAKE))
 		   {
-			  left.set(control.getY() *INTAKE_SPEED);
-			  right.set(control.getY()  *INTAKE_SPEED);
+			  left.set(INTAKE_SPEED);
+			  right.set(INTAKE_SPEED);
 		   }
-		else if (control.getY() < -1 * DEADZONE)
+		else if (control.getRawButton(SHOOT))
 		   {
-			   left.set(control.getY());
-			   right.set(control.getY());
+			   left.set(-1);
+			   right.set(-1);
 		   }
+		else if (control.getRawButton(ADJUST))
+		{
+			left.set(INTAKE_SPEED*-.25);
+			 right.set(INTAKE_SPEED*.25);
+		}
 		else
 		   {
 			   left.set(0);
 			   right.set(0);
 		   }
-		  window.set(control.getRawButton(WINDOW_UP) ? -.4 : (control.getRawButton(WINDOW_DOWN) ? -.05 : -.2) );
-		//window.set(control.getRawButton(WINDOW_UP) ? -.4 : -.2 );
-		  SmartDashboard.putString("DB/String 4", window.get() + " ");
+	  mover.set(control.getRawButton(VEX_UP) ? .45 : (control.getRawButton(VEX_DOWN) ? 0 : .2) );
+	  //SmartDashboard.putString("DB/String 4", window.get() + " ");
+	}
+	public void runAlternate(CANTalon tal1, CANTalon tal2){
+		tal1.set(control.getY());
+    	tal2.set(-1 *control.getY());
 	}
 	public void autoShoot()
 	{
-		for(int i = 0; i < 1000; ++i)
+		for(int i = 0; i < 1500; ++i)
 		{
-		left.set(1);
-		right.set(-1);
+			left.set(-1);
+			right.set(-1);
 		}
 		
-		for(int i = 0; i < 1000; ++i)
+		for(int i = 0; i < 1000000; ++i)
 		{
 			s.set(FINAL_POSITION);
 		}				
-		s.set(INITIAL_POSITION);
+		s.set(INITIAL_POSITION); 
 		left.set(0);
 		right.set(0);
+	}
+	public void holdUp()
+	{
+		for(int i = 0; i < 10000; ++i)
+		{
+			s.set(INITIAL_POSITION);
+		}		
+		for(int i = 0; i < 1000; ++i)
+		{
+			mover.set(.45);
+		}
+		mover.set(.2);
+		try
+		{
+			Thread.sleep(500);
+		}
+		catch (Exception e)
+		{
+		e.printStackTrace();
+		}
 	}
 }

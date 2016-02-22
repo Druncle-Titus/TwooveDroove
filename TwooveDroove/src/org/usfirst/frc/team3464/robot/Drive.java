@@ -30,7 +30,7 @@ public class Drive {
 		this.rMotor = rMotor;
 		this.l = l;
 		this.r = r;
-	}
+}
 	
 	//Constructor for autonomous
 	public Drive(){
@@ -50,20 +50,20 @@ public class Drive {
 		lMotor.set(l.getY() * -SPEED_MULTIPLIER);
 		rMotor.set(r.getY() * SPEED_MULTIPLIER);
 	}
-	public void autoForward()
+	public void autoForward(double speed)
 	{
 		for(int j = 0; j < lMotors.length; ++j)
 			{
-				lMotors[j].set(-1 *AUTO_GENERIC);
-				rMotors[j].set(AUTO_GENERIC);
+				lMotors[j].set(speed);
+				rMotors[j].set(-1 *speed); 
 			}
 	}
 	public void driveOverAuto()
 	{
 			for(int j = 0; j < lMotors.length; ++j)
 			{
-				lMotors[j].set(-1 *AUTO_GENERIC);
-				rMotors[j].set(AUTO_GENERIC);
+				lMotors[j].set(AUTO_GENERIC);
+				rMotors[j].set(-1 *AUTO_GENERIC);
 			}
 	}
 	public void autoStop()
@@ -74,7 +74,7 @@ public class Drive {
 			rMotors[j].set(0);
 		}	
 	}
-	public void autoLeft()
+	public void autoRight()
 	{
 		for(int i = 0; i < lMotors.length; ++i )
 		{
@@ -82,7 +82,7 @@ public class Drive {
 			rMotors[i].set(0.25 * AUTO_GENERIC);
 		}
 	}
-	public void autoRight()
+	public void autoLeft()
 	{
 		for(int i = 0; i < lMotors.length; ++i )
 		{

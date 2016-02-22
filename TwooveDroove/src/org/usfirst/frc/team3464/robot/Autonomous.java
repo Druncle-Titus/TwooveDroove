@@ -6,77 +6,40 @@ public class Autonomous {
 	Drive drive;
 	SensorUtil sense;
 	BallMechanism shooter;
-	public Autonomous(Drive d, SensorUtil ut, BallMechanism b){
-		drive = d;
-		sense = ut;
+	public Autonomous(Drive d, BallMechanism b){
+		drive = d;	
 		shooter = b;
 	}
 	private void driveUpAuto()
 	{
-		for(int i = 0; i < 500; ++i )
-			drive.autoForward();
+		shooter.holdUp();
+		for(int i = 0; i < 300; ++i ) 
+			drive.autoForward(AUTO_GENERIC * .75);
 		drive.autoStop();
 	}
 	private void driveOverAuto()
 	{
-		for(int i = 0; i < 1000; ++i ) 
-			drive.autoForward();
+		shooter.holdUp();
+		for(int i = 0; i < 300; ++i ) 
+			drive.autoForward(AUTO_GENERIC * .75);
+		for(int i = 0; i < 600; ++i ) 
+			drive.autoForward(AUTO_GENERIC);
 		drive.autoStop();
 	}
-	private void orient(double a)
-	{
-		double angle = sense.updateAngle();
-		if(angle - a < 0)
-		{
-			while (sense.updateAngle() - a < 1)
-			{
-				drive.autoLeft();
-			}	
-		}
-		else if (angle - a > 0)
-		{
-			while (sense.updateAngle() - a > -1)
-				drive.autoRight();
-		}
-		drive.autoStop();
-	}
+	
 	public void genAuto()
 	{
 		driveUpAuto();
 	}
-	public void defAuto() {
+	public void defAuto() 
+	{
 		driveOverAuto();
-		orient(0);}
-	public void lowAuto() 
+	}	
+	public void spyBot()
 	{
-		defAuto();
-		orient(90);
-		while(sense.getDistance() > 20 && sense.validRange() )
-		{
-			drive.autoForward();
-		}
-		drive.autoStop();
-		orient(0);
-		while(sense.getDistance() > 20 && sense.validRange() )
-		{
-			drive.autoForward();
-		}
-		drive.autoStop();
-		orient(-90);
-		while(sense.getDistance() > 10 && sense.validRange() )
-		{
-			drive.autoForward();
-		}
-		drive.autoStop();
-		shooter.autoShoot();
-	}
-	public void spyBox()
-	{
-		while(sense.getDistance() > 20 && sense.validRange() )
-		{
-			drive.autoForward();
-		}
-		drive.autoStop();
+		shooter.holdUp();
+		for(int i = 0; i < 300; ++i ) 
+			drive.autoForward(AUTO_GENERIC * .75);
 		shooter.autoShoot();
 	}
 }
