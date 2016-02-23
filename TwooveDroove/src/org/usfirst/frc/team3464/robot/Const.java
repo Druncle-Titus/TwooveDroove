@@ -10,20 +10,13 @@ public class Const {
 	//extend speed
 	public static final float  EXTEND_SPEED = .3f;
 	
-
 	//servo positions constants
 	public static final float  FINAL_POSITION = 1;
-	public static final float  INITIAL_POSITION = 0.3f;
+	public static final float  INITIAL_POSITION = 0;
 	
 	//artificial deadzone
 	public static final float  DEADZONE = .15f;	
 	//Device IDs for drive motors
-	/*
-	 * Front Left = 1
-	 * Back Left = 2
-	 * Front Right = 3
-	 * Back Right = 4
-	 */
 	public static final int[] LEFT_DRIVE_ID = {11, 10};
 	public static final int[] RIGHT_DRIVE_ID = {4, 3};
 	
@@ -33,8 +26,9 @@ public class Const {
 	public static final int MOVE1_ID = 7;
 	public static final int MOVE2_ID = 2;
 	public static final int LIFT_ID = 5;
+	public static final int EXTEND_ID = 6;
 
-	
+
 	//Joystick IDs
 	public static final int LEFT_STICK = 0;
 	public static final int RIGHT_STICK = 1;
@@ -49,7 +43,8 @@ public class Const {
 	public static final int INTAKE = 11;
 	public static final int SHOOT = 1;
 	public static final int ADJUST = 12;
-
+	public static final int ANGLE_UP = 10;
+	public static final int ANGLE_DOWN = 9;
 
 
 }

@@ -12,13 +12,13 @@ public class Lift {
 	Joystick stick;
 	
 	public Lift(Joystick j){
-		//extendMotor = new CANTalon(EXTEND_ID);
+		extendMotor = new CANTalon(EXTEND_ID);
 		move1 = new CANTalon(MOVE1_ID);
 		move2 = new CANTalon(MOVE2_ID);
 		stick = j;
 	}
-	
 	public void move(){
+		extendMotor.set(stick.getRawButton(ANGLE_UP) ? 1 : (stick.getRawButton(ANGLE_DOWN) ?  -1 : 0) );
 		if(stick.getRawButton(EXTEND_JOY)) 
 		{
 			move2.set(EXTEND_SPEED);
@@ -34,7 +34,6 @@ public class Lift {
 			move2.set(0);
 	    	move1.set(0);
 		}
-
 	}
 	
 }

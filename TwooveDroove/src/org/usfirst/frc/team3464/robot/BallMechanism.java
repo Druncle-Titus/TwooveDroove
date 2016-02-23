@@ -2,7 +2,6 @@ package org.usfirst.frc.team3464.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Servo;
 
@@ -24,32 +23,35 @@ public class BallMechanism {
 		mover = new CANTalon(LIFT_ID);
 	}
 	
-	
 	public void run()
 	{
 		s.set(control.getRawButton(SERVO_EXTENDER) ? FINAL_POSITION : INITIAL_POSITION);
+		SmartDashboard.putString("DB/String 4", "Servo :" + s.get());
 		if(control.getRawButton(INTAKE))
 		   {
 			  left.set(INTAKE_SPEED);
 			  right.set(INTAKE_SPEED);
+			  SmartDashboard.putString("DB/String 5", "INTAKE");
 		   }
 		else if (control.getRawButton(SHOOT))
 		   {
 			   left.set(-1);
 			   right.set(-1);
+			   SmartDashboard.putString("DB/String 5",  "SHOOT" );
 		   }
 		else if (control.getRawButton(ADJUST))
 		{
-			left.set(INTAKE_SPEED*-.25);
-			 right.set(INTAKE_SPEED*.25);
+			left.set(INTAKE_SPEED*.25);
+			 right.set(INTAKE_SPEED*-.25);
+			 SmartDashboard.putString("DB/String 5", "ADJUST");
 		}
 		else
 		   {
 			   left.set(0);
 			   right.set(0);
+			   SmartDashboard.putString("DB/String 5", "NONE");
 		   }
 	  mover.set(control.getRawButton(VEX_UP) ? .45 : (control.getRawButton(VEX_DOWN) ? 0 : .2) );
-	  //SmartDashboard.putString("DB/String 4", window.get() + " ");
 	}
 	public void runAlternate(CANTalon tal1, CANTalon tal2){
 		tal1.set(control.getY());
@@ -57,7 +59,7 @@ public class BallMechanism {
 	}
 	public void autoShoot()
 	{
-		for(int i = 0; i < 1500; ++i)
+		for(int i = 0; i < 3000; ++i)
 		{
 			left.set(-1);
 			right.set(-1);
@@ -66,10 +68,14 @@ public class BallMechanism {
 		for(int i = 0; i < 1000000; ++i)
 		{
 			s.set(FINAL_POSITION);
-		}				
-		s.set(INITIAL_POSITION); 
+		}
 		left.set(0);
 		right.set(0);
+		while( (s.get() - INITIAL_POSITION) > 0.0000001 )	
+		{
+			s.set(INITIAL_POSITION);
+		}
+		
 	}
 	public void holdUp()
 	{
@@ -85,10 +91,22 @@ public class BallMechanism {
 		try
 		{
 			Thread.sleep(500);
-		}
+		} 
 		catch (Exception e)
 		{
-		e.printStackTrace();
+			e.printStackTrace();
 		}
+	}
+	public void autoLowShoot()
+	{
+		for(int i = 0; i < 1000; ++i)
+		{
+			left.set(-1);
+			right.set(-1);
+		}
+		for(int i = 0; i < 1000; ++i)
+			mover.set(0);
+		left.set(0);
+		right.set(0);
 	}
 }

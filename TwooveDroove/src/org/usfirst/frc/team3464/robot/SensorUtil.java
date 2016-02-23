@@ -21,9 +21,7 @@ public class SensorUtil {
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
-	
-	public double gyroAngle;
-	
+	public double gyroAngle;	
 	public double ultraDistance;
 	
 	public SensorUtil(){
@@ -33,7 +31,7 @@ public class SensorUtil {
 		gyro.calibrate();
 		gyroAngle = gyro.getAngle();
 		
-		ultra = new Ultrasonic(0, 1);
+		ultra = new Ultrasonic(1, 2);
 		ultra.setEnabled(true);
 		ultra.setAutomaticMode(true);
 		
