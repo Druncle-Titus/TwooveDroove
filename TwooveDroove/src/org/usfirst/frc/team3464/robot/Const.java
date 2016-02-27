@@ -21,8 +21,8 @@ public class Const {
 	public static final int[] RIGHT_DRIVE_ID = {4, 3};
 	
 	//Mechanism IDs
-	public static final int LEFT_INTAKE_ID = 9;
-	public static final int RIGHT_INTAKE_ID = 8;
+	public static final int LEFT_INTAKE_ID = 2;
+	public static final int RIGHT_INTAKE_ID = 4;
 	public static final int MOVE1_ID = 7;
 	public static final int MOVE2_ID = 2;
 	public static final int LIFT_ID = 5;

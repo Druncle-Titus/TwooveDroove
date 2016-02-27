@@ -19,23 +19,23 @@ public class BallMechanism {
 		control = c;
 		left = new CANTalon(LEFT_INTAKE_ID);
 		right = new CANTalon(RIGHT_INTAKE_ID);
-		s = new Servo(0);
+		s = new Servo(9);
 		mover = new CANTalon(LIFT_ID);
 	}
 	
 	public void run()
 	{
 		s.set(control.getRawButton(SERVO_EXTENDER) ? FINAL_POSITION : INITIAL_POSITION);
-		SmartDashboard.putString("DB/String 4", "Servo :" + s.get());
+		//SmartDashboard.putString("DB/String 4", "Servo :" + s.get());
 		if(control.getRawButton(INTAKE))
 		   {
-			  left.set(INTAKE_SPEED);
+			  left.set(-1 * INTAKE_SPEED);
 			  right.set(INTAKE_SPEED);
 			  SmartDashboard.putString("DB/String 5", "INTAKE");
 		   }
 		else if (control.getRawButton(SHOOT))
 		   {
-			   left.set(-1);
+			   left.set(1);
 			   right.set(-1);
 			   SmartDashboard.putString("DB/String 5",  "SHOOT" );
 		   }
@@ -71,11 +71,10 @@ public class BallMechanism {
 		}
 		left.set(0);
 		right.set(0);
-		while( (s.get() - INITIAL_POSITION) > 0.0000001 )	
+		while( Math.abs(s.get() - INITIAL_POSITION) > 0.0000001 )	
 		{
 			s.set(INITIAL_POSITION);
 		}
-		
 	}
 	public void holdUp()
 	{

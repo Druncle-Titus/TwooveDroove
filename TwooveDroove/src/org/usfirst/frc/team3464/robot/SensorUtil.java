@@ -15,9 +15,6 @@ public class SensorUtil {
 	ADXL362 accelerometer;  //There is actually a built-in accelerometer in the roboRio
 	ADXRS450_Gyro gyro;
 	Ultrasonic ultra;
-	USBCamera cam;
-	CameraServer server;
-	//A:0, B:1
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
@@ -31,13 +28,9 @@ public class SensorUtil {
 		gyro.calibrate();
 		gyroAngle = gyro.getAngle();
 		
-		ultra = new Ultrasonic(1, 2);
+		ultra = new Ultrasonic(0, 1);
 		ultra.setEnabled(true);
 		ultra.setAutomaticMode(true);
-		
-		cam = new USBCamera();
-		server = CameraServer.getInstance();
-		server.startAutomaticCapture(cam);
 	}
 	
 	//Gyro methods
@@ -83,6 +76,5 @@ public class SensorUtil {
 	{
 		return ultra.isRangeValid();
 	}
-	//Camera methods
 	
 }

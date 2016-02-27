@@ -23,7 +23,7 @@ public class Autonomous {
 		shooter.holdUp();
 		for(int i = 0; i < 300; ++i ) 
 			drive.autoForward(AUTO_GENERIC * .75);
-		for(int i = 0; i < 600; ++i ) 
+		for(int i = 0; i < 600; ++i) 
 			drive.autoForward(AUTO_GENERIC);
 		drive.autoStop();
 	}
